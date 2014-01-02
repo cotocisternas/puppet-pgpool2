@@ -1,7 +1,8 @@
 # pgpool2 puppet module
 
-Puppet (3.x) module for setting up pgpool-II PostgreSQL clusters
-This is a fork of the unmaintained iksteen/puppet-pgpool2 module
+Puppet (3.x) module for setting up pgpool-II PostgreSQL clusters.
+
+This is a fork of the unmaintained iksteen/puppet-pgpool2 module.
 
 # Examples
 ```
