@@ -64,6 +64,7 @@ pcp_socket_dir = '<%= scope.lookupvar('pgpool2::params::pcp_socket_dir') %>'
     value = "'#{value}'" if value.is_a?(String)
 -%>
 backend_<%= key + index.to_s %> = <%= value %>
+backend_port<% index.to_s %> = <%= @backend_port %>
 <%
   end
 end

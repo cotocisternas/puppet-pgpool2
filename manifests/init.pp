@@ -53,6 +53,7 @@ class pgpool2(
   $pcp_socket_dir                       = undef,
   # backend connection settings
   $backends                             = [],
+  $backend_port                         = 5432,
   # authentication
   $enable_pool_hba                      = false,
   $authentication_timeout               = 60,
@@ -101,7 +102,7 @@ class pgpool2(
   $replication_stop_on_mismatch         = false,
   $failover_if_affected_tuples_mismatch = false,
   # LOAD BALANCING MODE
-  $load_balancing_mode                  = false,
+  $load_balance_mode                    = false,
   $ignore_leading_white_space           = true,
   $white_function_list                  = [],
   $black_function_list                  = ['nextval', 'setval'],
