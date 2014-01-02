@@ -1,16 +1,41 @@
-pgpool2
+# pgpool2 puppet module
 
-This is the pgpool2 module.
+Puppet (3.x) module for setting up pgpool-II PostgreSQL clusters
+This is a fork of the unmaintained iksteen/puppet-pgpool2 module
 
-License
--------
+# Examples
+```
+ class { pgpool2:
 
+   backends              => [
+     {
+       'hostname'        => 'db-server-01',
+       'weight'          => 1,
+       'data_directory'  => '/data',
+       'flag'            => 'ALLOW_TO_FAILOVER',
+     },
 
-Contact
--------
+     {
+       'hostname'        => 'db-server-02',
+       'weight'          => 1,
+       'data_directory'  => '/data',
+       'flag'            => 'ALLOW_TO_FAILOVER',
+     }
+   ],
 
+   backend_port        => 5432,
+   listen_addresses    => '*',
+   replication_mode    => true,
 
-Support
--------
+   # Logging configuration
+   load_balance_mode   => true,
+   log_destination     => 'syslog',
+   log_connections     => true,
+   log_hostname        => true,
+   debug_level         => 1,
 
-Please log tickets and issues at our [Projects site](http://projects.example.com)
+ }
+```
+# Authors
+
+Author Name Sam McLeod
