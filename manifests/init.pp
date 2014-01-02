@@ -1,40 +1,46 @@
 # == Class: pgpool2
 #
-# Full description of class pgpool2 here.
-#
-# === Parameters
-#
-# Document parameters here.
-#
-# [*sample_parameter*]
-#   Explanation of what this parameter affects and what it defaults to.
-#   e.g. "Specify one or more upstream ntp servers as an array."
-#
-# === Variables
-#
-# Here you should define a list of variables that this module would require.
-#
-# [*sample_variable*]
-#   Explanation of how this variable affects the funtion of this class and if it
-#   has a default. e.g. "The parameter enc_ntp_servers must be set by the
-#   External Node Classifier as a comma separated list of hostnames." (Note,
-#   global variables should not be used in preference to class parameters  as of
-#   Puppet 2.6.)
+# Puppet (3.x) module for setting up pgpool-II PostgreSQL clusters
+# This is a fork of the unmaintained iksteen/puppet-pgpool2 module
 #
 # === Examples
 #
 #  class { pgpool2:
-#    servers => [ 'pool.ntp.org', 'ntp.local.company.com' ]
+#
+#    backends              => [
+#      {
+#        'hostname'        => 'db-server-01',
+#        'weight'          => 1,
+#        'data_directory'  => '/data',
+#        'flag'            => 'ALLOW_TO_FAILOVER',
+#      },
+#
+#      {
+#        'hostname'        => 'db-server-02',
+#        'weight'          => 1,
+#        'data_directory'  => '/data',
+#        'flag'            => 'ALLOW_TO_FAILOVER',
+#      }
+#    ],
+#
+#    backend_port        => 5432,
+#    listen_addresses    => '*',
+#    replication_mode    => true,
+#
+#    # Logging configuration
+#    load_balance_mode   => true,
+#    log_destination     => 'syslog',
+#    log_connections     => true,
+#    log_hostname        => true,
+#    debug_level         => 1,
+#
 #  }
 #
 # === Authors
 #
-# Author Name <author@domain.com>
+# Author Name Sam McLeod
 #
-# === Copyright
-#
-# Copyright 2013 Your name here, unless otherwise noted.
-#
+
 class pgpool2(
   $package_name                         = undef,
   $package_ensure                       = 'present',
