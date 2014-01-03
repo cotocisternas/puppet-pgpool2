@@ -1,5 +1,7 @@
 # == Class: pgpool2
 #
+# https://github.com/infoxchange/puppet-pgpool2
+#
 # Puppet (3.x) module for setting up pgpool-II PostgreSQL clusters
 # This is a fork of the unmaintained iksteen/puppet-pgpool2 module
 #
@@ -60,6 +62,7 @@ class pgpool2(
   # backend connection settings
   $backends                             = [],
   $backend_port                         = 5432,
+  $backend_weight                       = 1,
   # authentication
   $enable_pool_hba                      = false,
   $authentication_timeout               = 60,
@@ -149,6 +152,15 @@ class pgpool2(
   $recovery_2nd_stage_command           = '',
   $recovery_timeout                     = 90,
   $client_idle_limit_in_recovery        = 0,
+  # MEMORY CACHE
+  $memory_cache_enable                  = 'on',
+  $memqcache_method                     = 'shmem',
+  $memqcache_expire                     = 0,
+  $memqcache_auto_cache_invalidation    = 'on',
+  $memqcache_maxcache                   = 1,
+  $white_memqcache_table_list           = undef,
+  $black_memqcache_table_list           = undef,
+  $memqcache_oiddir                     = undef,
   # OTHERS
   $relcache_expire                      = 0,
 ) {

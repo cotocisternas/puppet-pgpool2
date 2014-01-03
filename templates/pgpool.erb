@@ -64,7 +64,9 @@ pcp_socket_dir = '<%= scope.lookupvar('pgpool2::params::pcp_socket_dir') %>'
     value = "'#{value}'" if value.is_a?(String)
 -%>
 backend_<%= key + index.to_s %> = <%= value %>
-backend_port<% index.to_s %> = <%= @backend_port %>
+backend_port<%= index.to_s %> = <%= @backend_port %>
+backend_weight<%= index.to_s %> = <%= @backend_weight %>
+
 <%
   end
 end
@@ -415,6 +417,24 @@ client_idle_limit_in_recovery = <%= @client_idle_limit_in_recovery %>
                                    # of online recovery
                                    # 0 means no disconnection
                                    # -1 means immediate disconnection
+
+#------------------------------------------------------------------------------
+# MEMORY CACHE
+#------------------------------------------------------------------------------
+
+
+memory_cache_enable                  = <%= @memory_cache_enable %>
+
+memqcache_method                     = '<%= @memqcache_method %>'
+
+memqcache_expire                     = <%= @memqcache_expire %>
+
+memqcache_auto_cache_invalidation    = <%= @memqcache_auto_cache_invalidation %>
+
+memqcache_maxcache                   = <%= @memqcache_maxcache %>
+#white_memqcache_table_list
+#black_memqcache_table_list
+#memqcache_oiddir
 
 
 #------------------------------------------------------------------------------
