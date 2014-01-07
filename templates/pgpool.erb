@@ -321,7 +321,7 @@ enable_query_cache = <%= b(@enable_query_cache) %>
                                    # (change requires restart)
 
 pgpool2_hostname = '<%= @pgpool2_hostname %>'
-                                   # Set pgpool2 hostname 
+                                   # Set pgpool2 hostname
                                    # (change requires restart)
 
 # - System DB info -
@@ -422,7 +422,6 @@ client_idle_limit_in_recovery = <%= @client_idle_limit_in_recovery %>
 # MEMORY CACHE
 #------------------------------------------------------------------------------
 
-
 memory_cache_enable                  = <%= @memory_cache_enable %>
 
 memqcache_method                     = '<%= @memqcache_method %>'
@@ -432,10 +431,57 @@ memqcache_expire                     = <%= @memqcache_expire %>
 memqcache_auto_cache_invalidation    = <%= @memqcache_auto_cache_invalidation %>
 
 memqcache_maxcache                   = <%= @memqcache_maxcache %>
-#white_memqcache_table_list
-#black_memqcache_table_list
-#memqcache_oiddir
 
+#white_memqcache_table_list          = <%= @white_memqcache_table_list %>
+
+#black_memqcache_table_list          = <%= @black_memqcache_table_list %>
+
+#memqcache_oiddir                    = <%= @memqcache_oiddir %>
+
+#------------------------------------------------------------------------------
+# WATCHDOG
+#------------------------------------------------------------------------------
+
+use_watchdog                         = <%= @use_watchdog  %>
+                                     # Activates watchdog
+
+trusted_servers                      = '<%= @trusted_servers %>'
+                                     # trusted server list which are used
+                                     # to confirm network connection
+                                     # (hostA,hostB,hostC,...)
+
+wd_port                              = <%= @wd_port %>
+                                     # port number for watchdog service
+
+delegate_IP                          = '<%= @delegate_IP %>'
+                                     # delegate IP address
+
+## Lifecheck ##
+
+wd_interval                          = <%= @wd_interval %>
+                                     # lifecheck interval (sec) > 0
+
+wd_life_point                        = <%= @wd_life_point %>
+                                     # lifecheck retry times
+
+wd_lifecheck_query                   = '<%= @wd_lifecheck_query %>'
+                                     # lifecheck query to pgpool from watchdog
+
+## Switching virtual IP address ##
+
+ifconfig_path                        = '<%= @ifconfig_path %>'
+                                     # ifconfig command path
+
+if_up_cmd                            = '<%= @if_up_cmd %>'
+                                     # startup delegate IP command
+
+if_down_cmd                          = '<%= @if_down_cmd %>'
+                                     # shutdown delegate IP command
+
+arping_path                          = '<%= @arping_path %>'
+                                     # arping command path
+
+arping_cmd                           = '<%= @arping_cmd %>'
 
 #------------------------------------------------------------------------------
 # OTHERS

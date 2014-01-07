@@ -51,6 +51,7 @@ class pgpool2(
   $conf_owner                           = 'root',
   $conf_group                           = 'postgres',
   # == pgpool2.conf ==
+
   # CONNECTIONS
   # pgpool connection settings
   $listen_addresses                     = 'localhost',
@@ -72,6 +73,7 @@ class pgpool2(
   $ssl_cert                             = undef,
   $ssl_ca_cert                          = undef,
   $ssl_ca_cert_dir                      = undef,
+
   # POOLS
   # Pool size
   $num_init_children                    = 32,
@@ -81,6 +83,7 @@ class pgpool2(
   $child_max_connections                = 0,
   $connection_life_time                 = 0,
   $client_idle_limit                    = 0,
+
   # LOGS
   # Where to log
   $log_destination                      = 'stderr',
@@ -96,12 +99,15 @@ class pgpool2(
   $syslog_ident                         = 'pgpool',
   # Debug
   $debug_level                          = 0,
+
   # FILE LOCATIONS
   $pid_file_name                        = undef,
   $logdir                               = undef,
+
   # CONNECTION POOLING
   $connection_cache                     = true,
   $reset_query_list                     = ['ABORT', 'DISCARD ALL'],
+
   # REPLICATION MODE
   $replication_mode                     = false,
   $replicate_select                     = false,
@@ -110,14 +116,17 @@ class pgpool2(
   # Degenerate handling
   $replication_stop_on_mismatch         = false,
   $failover_if_affected_tuples_mismatch = false,
+
   # LOAD BALANCING MODE
   $load_balance_mode                    = false,
   $ignore_leading_white_space           = true,
   $white_function_list                  = [],
   $black_function_list                  = ['nextval', 'setval'],
+
   # MASTER/SLAVE MODE
   $master_slave_mode                    = false,
   $master_slave_sub_mode                = 'slony',
+
   # Streaming
   $sr_check_period                      = 0,
   $sr_check_user                        = 'nobody',
@@ -125,10 +134,12 @@ class pgpool2(
   $delay_threshold                      = 0,
   # Special commands
   $follow_master_command                = '',
+
   # PARALLEL MODE AND QUERY CACHE
   $parallel_mode                        = false,
   $enable_query_cache                   = false,
   $pgpool2_hostname                     = '',
+
   # System DB info
   $system_db_hostname                   = 'localhost',
   $system_db_port                       = 5432,
@@ -136,15 +147,18 @@ class pgpool2(
   $system_db_schema                     = 'pgpool_catalog',
   $system_db_user                       = 'pgpool',
   $system_db_password                   = '',
+
   # HEALTH CHECK
   $health_check_period                  = 0,
   $health_check_timeout                 = 20,
   $health_check_user                    = 'nobody',
   $health_check_password                = '',
+
   # FAILOVER AND FAILBACK
   $failover_command                     = '',
   $failback_command                     = '',
   $fail_over_on_backend_error           = true,
+
   # ONLINE RECOVERY
   $recovery_user                        = 'nobody',
   $recovery_password                    = '',
@@ -152,6 +166,7 @@ class pgpool2(
   $recovery_2nd_stage_command           = '',
   $recovery_timeout                     = 90,
   $client_idle_limit_in_recovery        = 0,
+
   # MEMORY CACHE
   $memory_cache_enable                  = 'on',
   $memqcache_method                     = 'shmem',
@@ -161,6 +176,24 @@ class pgpool2(
   $white_memqcache_table_list           = undef,
   $black_memqcache_table_list           = undef,
   $memqcache_oiddir                     = undef,
+
+  # WATCHDOG
+  $use_watchdog                         = false,
+  $trusted_servers                      = '',
+  $wd_port                              = 99,
+  $delegate_IP                          = undef,
+  # Lifecheck
+  $wd_interval                          = 10,
+  $wd_life_point                        = 3,
+  $wd_lifecheck_query                   = 'SELECT 1',
+  # Switching virtual IP address
+  $ifconfig_path                        = '/sbin',
+  $if_up_cmd                            = 'ifconfig eth0:0 inet $_IP_$ netmask 255.255.255.0',
+  $if_down_cmd                          = 'ifconfig eth0:0 down',
+  $arping_path                          = '/usr/sbin',
+  $arping_cmd                           = 'arping -U $_IP_$ -w 1',
+
+
   # OTHERS
   $relcache_expire                      = 0,
 ) {
