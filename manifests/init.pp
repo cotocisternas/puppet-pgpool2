@@ -251,7 +251,7 @@ class pgpool2(
 
   file { '/etc/sudoers.d/pgpool':
     ensure => present,
-    source => 'puppet:///modules/pgpool2/files/pgpool.sudoers',
+    source => 'puppet:///modules/pgpool2/pgpool.sudoers',
     owner  => 'root',
     group  => 'root',
     mode   => '0400',
