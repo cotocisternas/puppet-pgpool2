@@ -23,7 +23,8 @@ end
 # parameters, which are marked below, require a server shutdown and restart to
 # take effect.
 #
-
+# Documentation:
+# http://www.pgpool.net/docs/latest/pgpool-en.html
 
 #------------------------------------------------------------------------------
 # CONNECTIONS
@@ -440,9 +441,10 @@ memqcache_maxcache                   = <%= @memqcache_maxcache %>
 
 #------------------------------------------------------------------------------
 # WATCHDOG
+# Documentation: http://www.pgpool.net/pgpool-web/contrib_docs/watchdog/en.html
 #------------------------------------------------------------------------------
 
-use_watchdog                         = <%= @use_watchdog  %>
+use_watchdog                         = <%= @use_watchdog %>
                                      # Activates watchdog
 
 trusted_servers                      = '<%= @trusted_servers %>'
@@ -482,6 +484,15 @@ arping_path                          = '<%= @arping_path %>'
                                      # arping command path
 
 arping_cmd                           = '<%= @arping_cmd %>'
+
+wd_interval                          = <%= @wd_interval %>
+                                     # lifecheck interval (sec) > 0
+
+wd_life_point                        = <%= @wd_life_point %>
+                                     # lifecheck retry times
+
+wd_lifecheck_query                   = '<%= @wd_lifecheck_query %>'
+                                     # lifecheck query to pgpool from watchdog
 
 #------------------------------------------------------------------------------
 # OTHERS

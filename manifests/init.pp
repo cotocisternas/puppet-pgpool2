@@ -180,15 +180,18 @@ class pgpool2(
   # WATCHDOG
   $use_watchdog                         = false,
   $trusted_servers                      = '',
-  $wd_port                              = 99,
+  $wd_port                              = 9000,
   $delegate_IP                          = undef,
+  $other_pgpool_hostname0               = undef,
+  $other_pgpool_port0                   = 9898,
+  $other_wd_port0                       = 9000,
   # Lifecheck
   $wd_interval                          = 10,
   $wd_life_point                        = 3,
   $wd_lifecheck_query                   = 'SELECT 1',
   # Switching virtual IP address
   $ifconfig_path                        = '/sbin',
-  $if_up_cmd                            = 'ifconfig eth0:0 inet $_IP_$ netmask 255.255.255.0',
+  $if_up_cmd                            = 'ifconfig eth0:0 inet $_IP_$ netmask 255.255.254.0',
   $if_down_cmd                          = 'ifconfig eth0:0 down',
   $arping_path                          = '/usr/sbin',
   $arping_cmd                           = 'arping -U $_IP_$ -w 1',
@@ -210,6 +213,10 @@ class pgpool2(
   package { 'pgpool2':
     ensure => $package_ensure,
     name   => $pgpool2::params::package_name,
+  }
+
+  package { 'arping':
+    ensure => latest,
   }
 
   file { 'pgpool.conf':
