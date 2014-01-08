@@ -198,7 +198,7 @@ class pgpool2(
   $wd_interval                          = 10,
   $wd_heartbeat_port                    = 9899,
   $wd_heartbeat_keepalive               = 2,
-  $wd_heartbeat_deadtime                = 60,
+  $wd_heartbeat_deadtime                = 200,
   $heartbeat_destination0               = '',
   $heartbeat_destination_port0          = 9899,
   $heartbeat_device0                    = 'eth0:0',
