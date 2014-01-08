@@ -43,9 +43,9 @@ class pgpool2::params(
       $package_name = pick($custom_package_name, 'pgpool2')
       $confdir = pick($custom_confdir, '/etc/pgpool2')
       $service_name = pick($custom_service_name, 'pgpool2')
-      $socket_dir = pick($custom_socket_dir, '/var/run/postgresql')
+      $socket_dir = pick($custom_socket_dir, '/run/postgresql')
       $pcp_socket_dir = pick($custom_pcp_socket_dir, $socket_dir)
-      $pid_file_name = pick($custom_pid_file_name, '/var/run/postgresql/pgpool.pid')
+      $pid_file_name = pick($custom_pid_file_name, '/run/postgresql/pgpool.pid')
       $logdir = pick($custom_logdir, '/var/log/postgresql')
     }
     default: {

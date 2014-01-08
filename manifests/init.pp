@@ -201,7 +201,7 @@ class pgpool2(
   $wd_heartbeat_deadtime                = 200,
   $heartbeat_destination0               = '',
   $heartbeat_destination_port0          = 9899,
-  $heartbeat_device0                    = 'eth0:0',
+  $heartbeat_device0                    = 'eth0',
   $wd_lifecheck_query                   = 'SELECT 1',
   $wd_life_point                        = 3,
   $wd_lifecheck_dbname                  = 'postgres',
