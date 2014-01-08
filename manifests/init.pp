@@ -179,22 +179,39 @@ class pgpool2(
 
   # WATCHDOG
   $use_watchdog                         = false,
+  $wd_hostname                          = '',
+  $wd_authkey                           = '',
+  $ping_path                            = '/bin',
   $trusted_servers                      = '',
   $wd_port                              = 9000,
   $delegate_IP                          = undef,
   $other_pgpool_hostname0               = undef,
   $other_pgpool_port0                   = 9898,
   $other_wd_port0                       = 9000,
+  $clear_memqcache_on_escalation        = 'on',
+  $wd_escalation_command                = '',
+
   # Lifecheck
+  $wd_lifecheck_method                  = 'heartbeat',
   $wd_interval                          = 10,
-  $wd_life_point                        = 3,
+  $wd_heartbeat_port                    = 9899,
+  $wd_heartbeat_keepalive               = 2,
+  $wd_heartbeat_deadtime                = 10,
+  $heartbeat_destination0               = '',
+  $heartbeat_destination_port0          = 9899,
+  $heartbeat_device0                    = 'eth0:0',
   $wd_lifecheck_query                   = 'SELECT 1',
+  $wd_life_point                        = 3,
+  $wd_lifecheck_dbname                  = 'postgres',
+  $wd_lifecheck_user                    = 'postgres',
+  $wd_lifecheck_password                = '',
+
   # Switching virtual IP address
-  $ifconfig_path                        = '/sbin',
-  $if_up_cmd                            = 'ifconfig eth0:0 inet $_IP_$ netmask 255.255.254.0',
-  $if_down_cmd                          = 'ifconfig eth0:0 down',
-  $arping_path                          = '/usr/sbin',
-  $arping_cmd                           = 'arping -U $_IP_$ -w 1',
+  $ifconfig_path                        = '/usr/bin',
+  $if_up_cmd                            = 'sudo ifconfig eth0:0 inet $_IP_$ netmask 255.255.254.0',
+  $if_down_cmd                          = 'sudo ifconfig eth0:0 down',
+  $arping_path                          = '/usr/bin',
+  $arping_cmd                           = 'sudo arping -U $_IP_$ -w 1',
 
 
   # OTHERS
@@ -215,7 +232,7 @@ class pgpool2(
     name   => $pgpool2::params::package_name,
   }
 
-  package { 'arping':
+  package { 'iputils-arping':
     ensure => latest,
   }
 
