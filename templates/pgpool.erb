@@ -519,9 +519,6 @@ wd_lifecheck_user                    = '<%= @wd_lifecheck_user %>'
 
 wd_lifecheck_password                = '<%= @wd_lifecheck_password %>'
 
-wd_interval                          = <%= @wd_interval %>
-                                     # lifecheck interval (sec) > 0
-
 wd_hostname                          = '<%= @wd_hostname %>'
 
 wd_authkey                           = '<%= @wd_authkey %>'
@@ -542,7 +539,7 @@ heartbeat_destination_port0          = <%= @heartbeat_destination_port0 %>
 
 heartbeat_device0                    = '<%= @heartbeat_device0 %>'
 
-clear_memqcache_on_escalation        = '<%= @clear_memqcache_on_escalation %>'
+clear_memqcache_on_escalation        = <%= @clear_memqcache_on_escalation %>
 
 
 #------------------------------------------------------------------------------

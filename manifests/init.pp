@@ -5,6 +5,8 @@
 # Puppet (3.x) module for setting up pgpool-II PostgreSQL clusters
 # This is a fork of the unmaintained iksteen/puppet-pgpool2 module
 #
+# Requires pgpool-II 3.3 or higher
+#
 # === Examples
 #
 #  class { pgpool2:
@@ -196,7 +198,7 @@ class pgpool2(
   $wd_interval                          = 10,
   $wd_heartbeat_port                    = 9899,
   $wd_heartbeat_keepalive               = 2,
-  $wd_heartbeat_deadtime                = 30,
+  $wd_heartbeat_deadtime                = 60,
   $heartbeat_destination0               = '',
   $heartbeat_destination_port0          = 9899,
   $heartbeat_device0                    = 'eth0:0',
