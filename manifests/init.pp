@@ -249,6 +249,14 @@ class pgpool2(
     notify  => Service['pgpool2'],
   }
 
+  file { '/etc/sudoers.d/pgpool':
+    ensure => present,
+    source => 'puppet:///modules/pgpool2/files/pgpool.sudoers',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0400',
+  }
+
   file { 'pcp.conf':
     ensure  => 'present',
     path    => "${pgpool2::params::confdir}/pcp.conf",
