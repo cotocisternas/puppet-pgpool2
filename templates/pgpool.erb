@@ -241,7 +241,7 @@ replication_stop_on_mismatch          = <%= b(@replication_stop_on_mismatch) %>
                                        # which is most likely "minority"
                                        # If off, just force to exit this session
 
-failover_if_affected_tuples_mismatch = <%= b(failover_if_affected_tuples_mismatch) %>
+failover_if_affected_tuples_mismatch = <%= b(@failover_if_affected_tuples_mismatch) %>
                                       # On disagreement with the number of affected
                                       # tuples in UPDATE/DELETE queries, then
                                       # degenerate the node which is most likely
