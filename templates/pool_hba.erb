@@ -85,13 +85,11 @@ host    all             all             ::1/128                 trust
 #host    replication     postgres        ::1/128                 md5
 
 <%
-@pgclients.each_with_index do |item, index|
-  item.each do |key, value|
+@pgclients.each do |key, value|
 -%>
 # <%= key %>
 host    all             all             <%= value %>            md5
 
 <%
-  end
 end
 -%>

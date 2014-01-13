@@ -27,11 +27,10 @@
 #      }
 #    ],
 #
-#    pgclients             => [
+#    pgclients             =>
 #      {
 #        'my-web-server'   => '192.168.0.100/32',
 #      },
-#    ],
 #
 #    backend_port          => 5432,
 #    listen_addresses      => '*',
