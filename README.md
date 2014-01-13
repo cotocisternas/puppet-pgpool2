@@ -24,6 +24,12 @@ This is a fork of the unmaintained iksteen/puppet-pgpool2 module.
      }
    ],
 
+   pgclients             => [
+     {
+       'my-web-server'   => '192.168.0.100/32',
+     },
+   ],
+
    backend_port        => 5432,
    listen_addresses    => '*',
    replication_mode    => true,
