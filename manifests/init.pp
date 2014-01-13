@@ -27,16 +27,22 @@
 #      }
 #    ],
 #
-#    backend_port        => 5432,
-#    listen_addresses    => '*',
-#    replication_mode    => true,
+#    pgclients             => [
+#      {
+#        'my-web-server'   => '192.168.0.100/32',
+#      },
+#    ],
+#
+#    backend_port          => 5432,
+#    listen_addresses      => '*',
+#    replication_mode      => true,
 #
 #    # Logging configuration
-#    load_balance_mode   => true,
-#    log_destination     => 'syslog',
-#    log_connections     => true,
-#    log_hostname        => true,
-#    debug_level         => 1,
+#    load_balance_mode     => true,
+#    log_destination       => 'syslog',
+#    log_connections       => true,
+#    log_hostname          => true,
+#    debug_level           => 1,
 #
 #  }
 #
@@ -215,6 +221,9 @@ class pgpool2(
   $arping_path                          = '/usr/bin',
   $arping_cmd                           = 'sudo arping -U $_IP_$ -w 1',
 
+  # Authentication
+  $pgclients                             = [],
+
 
   # OTHERS
   $relcache_expire                      = 0,
@@ -245,6 +254,17 @@ class pgpool2(
     group   => $conf_group,
     mode    => '0640',
     content => template('pgpool2/pgpool.erb'),
+    require => Package['pgpool2'],
+    notify  => Service['pgpool2'],
+  }
+
+  file { 'pool_hba.conf':
+    ensure  => 'present',
+    path    => "${pgpool2::params::confdir}/pool_hba.conf",
+    owner   => $conf_owner,
+    group   => $conf_group,
+    mode    => '0640',
+    content => template('pgpool2/pool_hba.erb'),
     require => Package['pgpool2'],
     notify  => Service['pgpool2'],
   }
