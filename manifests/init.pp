@@ -302,6 +302,8 @@ class pgpool2(
     notify  => Service['pgpool2'],
   }
 
+  # Workaround for pgpool bug, see: http://postgresql.1045698.n5.nabble.com/pgpool-II-3-0-postgres-9rc1-md5-authentication-not-working-tp2839871p2839958.html
+  # /etc/pgpool/pool_passwd doesn't work unless an empty /usr/local/etc/pool_passwd file exists
   file { '/usr/local/etc/pool_passwd':
     ensure => file,
     owner  => 'postgres',
