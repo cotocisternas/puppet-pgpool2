@@ -276,9 +276,9 @@ class pgpool2(
   file { 'pool_passwd':
     ensure  => 'present',
     path    => "${pgpool2::params::confdir}/pool_passwd",
-    owner   => $conf_owner,
+    owner   => $conf_group,
     group   => $conf_group,
-    mode    => '0640',
+    mode    => '0644',
     content => template('pgpool2/pool_passwd.erb'),
     require => Package['pgpool2'],
     notify  => Exec['pgpoolreload'],
@@ -300,6 +300,13 @@ class pgpool2(
     mode    => '0640',
     require => Package['pgpool2'],
     notify  => Service['pgpool2'],
+  }
+
+  file { '/usr/local/etc/pool_passwd':
+    ensure => file,
+    owner  => 'postgres',
+    group  => 'postgres',
+    mode   => '0444',
   }
 
   service { 'pgpool2':
