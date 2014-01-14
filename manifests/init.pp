@@ -32,6 +32,11 @@
 #        'my-web-server'   => '192.168.0.100/32',
 #      },
 #
+#    pgpoolpasswd          =>
+#      {
+#        'username'        => 'md5ofpassword',
+#      },
+#
 #    backend_port          => 5432,
 #    listen_addresses      => '*',
 #    replication_mode      => true,
@@ -222,10 +227,10 @@ class pgpool2(
 
   # Authentication
   $pgclients                             = [],
-
+  $pgpoolpasswd                          = [],
 
   # OTHERS
-  $relcache_expire                      = 0,
+  $relcache_expire                       = 0,
 ) {
   class { 'pgpool2::params':
     custom_package_name   => $package_name,
@@ -265,7 +270,18 @@ class pgpool2(
     mode    => '0640',
     content => template('pgpool2/pool_hba.erb'),
     require => Package['pgpool2'],
-    notify  => Service['pgpool2'],
+    notify  => Exec['pgpoolreload'],
+  }
+
+  file { 'pool_passwd':
+    ensure  => 'present',
+    path    => "${pgpool2::params::confdir}/pool_passwd",
+    owner   => $conf_owner,
+    group   => $conf_group,
+    mode    => '0640',
+    content => template('pgpool2/pool_passwd.erb'),
+    require => Package['pgpool2'],
+    notify  => Exec['pgpoolreload'],
   }
 
   file { '/etc/sudoers.d/pgpool':
@@ -287,12 +303,20 @@ class pgpool2(
   }
 
   service { 'pgpool2':
-    ensure  => running,
-    name    => $pgpool2::params::service_name,
-    enable  => true,
-    require => [
+    ensure     => running,
+    name       => $pgpool2::params::service_name,
+    enable     => true,
+    hasrestart => true,
+    require    => [
       File['pgpool.conf'],
       File['pcp.conf'],
     ],
+  }
+
+  exec { 'pgpoolreload':
+    command     => '/etc/init.d/pgpool2 reload',
+    refreshonly => true,
+    require     => Package['pgpool2'],
+    returns     => 3,
   }
 }
